@@ -44,9 +44,9 @@ RUN chmod 755 /*.sh
 ADD supporting_files/supervisord-apache2.conf /etc/supervisor/conf.d/supervisord-apache2.conf
 ADD supporting_files/supervisord-mysqld.conf /etc/supervisor/conf.d/supervisord-mysqld.conf
 
-# Set PHP timezones to Europe/London
-RUN sed -i "s/;date.timezone =/date.timezone = Europe\/London/g" /etc/php/5.6/apache2/php.ini
-RUN sed -i "s/;date.timezone =/date.timezone = Europe\/London/g" /etc/php/5.6/cli/php.ini
+# Set PHP timezones to America/New_York
+RUN sed -i "s/;date.timezone =/date.timezone = America\/New_York/g" /etc/php/5.6/apache2/php.ini
+RUN sed -i "s/;date.timezone =/date.timezone = America\/New_York/g" /etc/php/5.6/cli/php.ini
 
 # Remove pre-installed database
 RUN rm -rf /var/lib/mysql
@@ -78,7 +78,7 @@ RUN mkdir -p /app && rm -fr /var/www/html && ln -s /app /var/www/html
 ADD app/ /app
 
 #Environment variables to configure php
-ENV PHP_UPLOAD_MAX_FILESIZE 10M
+ENV PHP_UPLOAD_MAX_FILESIZE 300MB
 ENV PHP_POST_MAX_SIZE 10M
 
 # Add volumes for the app and MySql
